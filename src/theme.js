@@ -22,12 +22,14 @@ const theme = createTheme({
       fontSize: 38,
       fontWeight: 'bold',
       textTransform: 'uppercase',
-      lineHeight: 1
+      lineHeight: 1,
+      padding: '1rem'
     },
     h2: {
       fontSize: 20,
       textTransform: 'uppercase',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      padding: '1rem'
     },
     h3: {
       fontSize: 18,
