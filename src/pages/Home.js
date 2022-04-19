@@ -1,4 +1,5 @@
 import Typography from '@mui/material/Typography';
+import News from "../components/News";
 
 function Home() {
     return (
@@ -8,6 +9,7 @@ function Home() {
             <Typography variant="h2" component="h2">Recommended</Typography>
             <Typography variant="h2" component="h2">Favourites</Typography>
             <Typography variant="h2" component="h2">News</Typography>
+            <News />
         </>
     );
 }
