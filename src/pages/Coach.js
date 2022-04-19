@@ -1,6 +1,10 @@
+import Typography from '@mui/material/Typography';
+
 function Coach() {
     return (
-        <><p>This is coach page</p></>
+        <>
+            <Typography variant="title" component="h1">Coach</Typography>
+        </>
     );
 }
 

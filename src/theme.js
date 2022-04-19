@@ -18,13 +18,16 @@ const theme = createTheme({
       fontWeight: 'initial',
       fontSize: 'initial',
     },
-    h1: {
-      fontSize: 28,
-      fontWeight: 'bold'
+    title: {
+      fontSize: 38,
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      lineHeight: 1
     },
     h2: {
-      fontSize: 14,
-      textTransform: 'uppercase'
+      fontSize: 20,
+      textTransform: 'uppercase',
+      fontWeight: 'bold'
     },
     h3: {
       fontSize: 18,
