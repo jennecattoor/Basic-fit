@@ -2,13 +2,10 @@ import Typography from '@mui/material/Typography';
 import News from "../components/News";
 import Image from 'mui-image';
 import Box from '@mui/material/Box';
-import useFetch from '../hooks/useFetch'
 
 import Testing from '../static/images/1.jpg';
 
 function Home() {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    const { data: username } = useFetch(`${backendUrl}/api/user`)
 
     return (
         <>
@@ -16,10 +13,10 @@ function Home() {
                 <Image
                     src={Testing}
                     duration={500}
-                    height="60vh" />
+                    height="60%" />
             </Box>
             <Box sx={{ marginTop: '25rem' }}>
-                <Typography variant="title" component="h1" sx={{ background: 'linear-gradient(rgba(255,0,0,0), rgba(255,255,255,1));' }}>Hello<br />{username}</Typography>
+                <Typography variant="title" component="h1" sx={{ background: 'linear-gradient(rgba(255,0,0,0), rgba(255,255,255,1));' }}>Hello<br />{localStorage.getItem('username')}</Typography>
                 <Box sx={{ background: '#fff' }}>
                     <Typography variant="body" component="h4">Make fitness a basic, check our workouts and Go For It!</Typography>
                     <Typography variant="h2" component="h2">Favourites</Typography>
