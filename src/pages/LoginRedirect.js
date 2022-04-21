@@ -26,7 +26,7 @@ const LoginRedirect = (props) => {
         localStorage.setItem('jwt', res.jwt);
         localStorage.setItem('username', res.user.username);
         setText('You have been successfully logged in. You will be redirected in a few seconds...');
-        setTimeout(() => navigate('/'), 3000); // Redirect to homepage after 3 sec
+        setTimeout(() => navigate('/home'), 500); // Redirect to homepage after 3 sec
       })
       .catch(err => {
         console.log(err);

@@ -9,7 +9,7 @@ const TopNav = () => {
         <Box>
             <AppBar position="static" sx={{ background: 'none', boxShadow: 0 }} >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 1rem 0 1rem' }}>
-                    <Link to="/profile"><AccountCircleIcon sx={{ color: '#2d2d2d' }} /></Link>
+                    <Link to="/"><AccountCircleIcon sx={{ color: '#2d2d2d' }} /></Link>
                     <Link to="/notification"><NotificationsIcon sx={{ color: '#2d2d2d' }} /></Link>
                 </Box>
             </AppBar>

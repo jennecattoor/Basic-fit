@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -7,10 +9,10 @@ const providersNames = [
 ];
 
 const LoginButton = (props) => <a href={`${backendUrl}/api/connect/${props.providerName}`}>
-  <button style={{ width: '150px' }}>Connect to {props.providerName}</button>
+  <Button variant="outlined">Connect to {props.providerName}</Button>
 </a>;
 
-const LogoutButton = (props) => <button onClick={props.onClick}>Logout</button>;
+const LogoutButton = (props) => <Button variant="outlined" onClick={props.onClick}>Logout</Button>;
 
 const Login = (props) => {
   const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
@@ -37,9 +39,9 @@ const Login = (props) => {
   let text;
 
   if (isLogged) {
-    text = `Welcome ${localStorage.getItem('username')}, you are connected!`;
+    text = <Typography variant="h2" component="h2">Welcome {localStorage.getItem('username')}, you are connected!</Typography>;
   } else {
-    text = 'You are not connected. Please log in.';
+    text = <Typography variant="h2" component="h2">You are not connected, please log in</Typography>;
   }
 
   return <div>
