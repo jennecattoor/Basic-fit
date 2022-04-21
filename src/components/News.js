@@ -13,8 +13,8 @@ function News() {
                     height="140"
                     image="https://picsum.photos/400"
                 />
-                <Typography variant="h2" component="h2">Discover the Air Games</Typography>
-                <Typography variant="body" component="body">Good news! Thanks to our partnership with the Air Games, our members can enjoy a discounted rate</Typography>
+                <Typography variant="h2">Discover the Air Games</Typography>
+                <Typography variant="body">Good news! Thanks to our partnership with the Air Games, our members can enjoy a discounted rate</Typography>
             </CardContent>
         </Card>
     );
