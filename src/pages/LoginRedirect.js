@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import { useStore } from '../store';
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = "http://localhost:1337";
 
 const LoginRedirect = (props) => {
-
-  const setLoggedIn = useStore(state => state.setLoggedIn);
   const [text, setText] = useState('Loading...');
   const location = useLocation();
   const params = useParams();
@@ -26,15 +23,16 @@ const LoginRedirect = (props) => {
       .then(res => {
         // Successfully logged with Strapi
         // Now saving the jwt to use it for future authenticated requests to Strapi
-        setLoggedIn(res.jwt, res.user.username);
+        localStorage.setItem('jwt', res.jwt);
+        localStorage.setItem('username', res.user.username);
         setText('You have been successfully logged in. You will be redirected in a few seconds...');
-        setTimeout(() => navigate("/"), 3000); // Redirect to homepage after 3 sec
+        setTimeout(() => navigate('/'), 3000); // Redirect to homepage after 3 sec
       })
       .catch(err => {
         console.log(err);
         setText('An error occurred, please see the developer console.')
       });
-  }, [navigate, location.search, params.providerName, setLoggedIn]);
+  }, [navigate, location.search, params.providerName]);
 
   return <p>{text}</p>
 };
