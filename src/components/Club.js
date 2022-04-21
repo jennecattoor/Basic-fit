@@ -14,7 +14,7 @@ function Club() {
                     height="90"
                     image={Image}
                 />
-                <Typography variant="h3" component="h3">Basic-Fit Knokke-Heist Duinenwater</Typography>
+                <Typography variant="h3">Basic-Fit Knokke-Heist Duinenwater</Typography>
             </CardContent>
         </Card>
     );

@@ -39,13 +39,13 @@ const Login = (props) => {
   let text;
 
   if (isLogged) {
-    text = <Typography variant="h2" component="h2">Welcome {localStorage.getItem('username')}, you are connected!</Typography>;
+    text = <Typography variant="h2">Welcome {localStorage.getItem('username')}, you are connected!</Typography>;
   } else {
-    text = <Typography variant="h2" component="h2">You are not connected, please log in</Typography>;
+    text = <Typography variant="h2">You are not connected, please log in</Typography>;
   }
 
   return <div>
-    <p>{text}</p>
+    {text}
     {buttons}
   </div>;
 }

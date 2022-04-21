@@ -16,8 +16,8 @@ function Explore() {
 
     return (
         <>
-            <Typography variant="title" component="h1">Explore</Typography>
-            <Box sx={{ width: '100%', typography: 'body1' }}>
+            <Typography variant="title">Explore</Typography>
+            <Box sx={{ width: '100%' }}>
                 <TabContext value={value}>
                     <Box sx={{ padding: '1rem' }}>
                         <Tabs value={value} onChange={handleChange} centered>
