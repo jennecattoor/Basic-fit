@@ -17,7 +17,7 @@ const theme = createTheme({
     body: {
       fontWeight: 'initial',
       fontSize: 'initial',
-      padding: '1rem'
+      padding: '1rem',
     },
     title: {
       fontSize: 38,

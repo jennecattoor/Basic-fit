@@ -13,7 +13,7 @@ function Home() {
                 <Image
                     src={Testing}
                     duration={500}
-                    height="30rem" />
+                    height="80rem" />
             </Box>
             <Box sx={{ marginTop: '25rem' }}>
                 <Typography variant="title" component="h1" sx={{ background: 'linear-gradient(rgba(255,0,0,0), rgba(255,255,255,1));' }}>Hello<br />{localStorage.getItem('username')}</Typography>

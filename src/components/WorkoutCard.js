@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 
 import Image from '../static/images/workout.jpg';
 
-function Workout() {
+function WorkoutCard({ workout }) {
     return (
         <Card sx={{ maxWidth: 225, boxShadow: 0, margin: '0 1rem', background: "none" }}>
             <CardContent sx={{ padding: 0 }}>
@@ -14,11 +14,11 @@ function Workout() {
                     alt="Image of Dumbells"
                     image={Image}
                 />
-                <Typography variant="h2" sx={{ color: '#fff', padding: '.5rem 0 0 0' }}>Easter Workout</Typography>
-                <Typography variant="body" sx={{ color: '#fff', padding: '0' }}>Beginner · 21 min</Typography>
+                <Typography variant="h2" sx={{ color: '#fff', padding: '.5rem 0 0 0' }}>{workout.name}</Typography>
+                <Typography variant="body" sx={{ color: '#fff', padding: '0' }}>{workout.level} · {workout.duration} min</Typography>
             </CardContent>
         </Card>
     );
 }
 
-export default Workout;
+export default WorkoutCard;
