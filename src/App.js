@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import Coach from "./pages/Coach";
 import Clubs from "./pages/Clubs";
+import Workouts from "./pages/Workouts";
 import Login from './pages/Login';
 import LoginRedirect from './pages/LoginRedirect';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="explore" element={<Explore />} />
           <Route path="coach" element={<Coach />} />
           <Route path="clubs" element={<Clubs />} />
+          <Route path="workouts" element={<Workouts />} />
         </Route>
       </Routes>
     </div >

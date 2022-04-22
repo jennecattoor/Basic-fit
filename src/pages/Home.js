@@ -13,12 +13,12 @@ function Home() {
                 <Image
                     src={Testing}
                     duration={500}
-                    height="60%" />
+                    height="30rem" />
             </Box>
             <Box sx={{ marginTop: '25rem' }}>
-                <Typography variant="title" sx={{ background: 'linear-gradient(rgba(255,0,0,0), rgba(255,255,255,1));' }}>Hello<br />{localStorage.getItem('username')}</Typography>
+                <Typography variant="title" component="h1" sx={{ background: 'linear-gradient(rgba(255,0,0,0), rgba(255,255,255,1));' }}>Hello<br />{localStorage.getItem('username')}</Typography>
                 <Box sx={{ background: '#fff' }}>
-                    <Typography variant="body" component="h4">Make fitness a basic, check our workouts and Go For It!</Typography>
+                    <Typography variant="body">Make fitness a basic, check our workouts and Go For It!</Typography>
                     <Typography variant="h2" >Favourites</Typography>
                     <Typography variant="h2" >Recommended</Typography>
                     <Typography variant="h2" >News</Typography>

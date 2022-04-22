@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 import Browse from "../components/Browse";
+import { Link } from 'react-router-dom'
 
 function Explore() {
     const [value, setValue] = React.useState('1');
@@ -26,7 +27,7 @@ function Explore() {
                         </Tabs>
                     </Box>
                     <TabPanel value="1">
-                        <Browse title='Workouts' text='Club and home workouts, Audio Coach, and GXR classes for everyone' />
+                        <Link to="/workouts"><Browse title='Workouts' text='Club and home workouts, Audio Coach, and GXR classes for everyone' /></Link>
                         <Browse title='Programs' text='Selection of workouts over several weeks for everyone and everywhere' />
                         <Browse title='Nutrition' text='Recipes, blogs and advice from nutrition experts' />
                         <Browse title='Lifestyle' text='Your inspiration to feel good and happy' />
