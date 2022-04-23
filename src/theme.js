@@ -17,14 +17,14 @@ const theme = createTheme({
     body: {
       fontWeight: 'initial',
       fontSize: 'initial',
-      padding: '1rem',
+      padding: '0 1rem',
     },
     title: {
       fontSize: 38,
       fontWeight: 'bold',
       textTransform: 'uppercase',
       lineHeight: 1.2,
-      padding: '2rem 1rem'
+      padding: '1rem',
     },
     h2: {
       fontSize: 20,
@@ -35,7 +35,7 @@ const theme = createTheme({
     h3: {
       fontSize: 18,
       fontWeight: 'bold',
-      padding: '1rem'
+      padding: '0 1rem'
     },
     h4: {
       fontSize: 14,

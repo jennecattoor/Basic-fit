@@ -27,7 +27,7 @@ function Explore() {
                         </Tabs>
                     </Box>
                     <TabPanel value="1">
-                        <Link to="/workouts"><Browse title='Workouts' text='Club and home workouts, Audio Coach, and GXR classes for everyone' /></Link>
+                        <Link to="/workouts" style={{ textDecoration: 'none' }}><Browse title='Workouts' text='Club and home workouts, Audio Coach, and GXR classes for everyone' /></Link>
                         <Browse title='Programs' text='Selection of workouts over several weeks for everyone and everywhere' />
                         <Browse title='Nutrition' text='Recipes, blogs and advice from nutrition experts' />
                         <Browse title='Lifestyle' text='Your inspiration to feel good and happy' />

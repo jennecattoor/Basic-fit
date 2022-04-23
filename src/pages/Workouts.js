@@ -4,8 +4,7 @@ import useFetch from '../hooks/useFetch';
 
 function Workouts() {
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    const { data: workouts, isLoading, error } = useFetch(`${backendUrl}/api/workouts`)
-    console.log(workouts)
+    const { data: workouts, isLoading, error } = useFetch(`${backendUrl}/api/workouts`);
     return (
         <>
             <Typography variant="title">Workouts</Typography>
@@ -15,6 +14,8 @@ function Workouts() {
                 {error && <Alert severity="error">Something went wrong</Alert>}
                 <Grid container>{workouts && workouts.data.map(workout => <Grid item xs={6} key={workout.id}><WorkoutCard workout={workout.attributes} /></Grid>)}</Grid>
             </Box>
+            <Typography variant="h2">All workouts</Typography>
+            <Grid container></Grid>
         </>
     );
 }
