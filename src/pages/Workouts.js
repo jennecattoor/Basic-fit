@@ -7,7 +7,7 @@ function Workouts() {
     const { data: workouts, isLoading, error } = useFetch(`${backendUrl}/api/workouts`);
     return (
         <>
-            <Typography variant="title">Workouts</Typography>
+            <Typography variant="title" component="h1">Workouts</Typography>
             <Box sx={{ color: '#fff', background: 'linear-gradient(0.25turn, #FF9D26, #FE7000);', paddingBottom: '1.5rem' }}>
                 <Typography variant="h2">Recommended</Typography>
                 {isLoading && <CircularProgress />}

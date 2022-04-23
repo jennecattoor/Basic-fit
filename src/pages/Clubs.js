@@ -5,7 +5,7 @@ import Club from '../components/Club';
 function Clubs() {
     return (
         <>
-            <Typography variant="title">Clubs</Typography>
+            <Typography variant="title" component="h1">Clubs</Typography>
             <Box sx={{ color: '#fff', background: 'linear-gradient(0.25turn, #FF9D26, #FE7000);', paddingBottom: '1.5rem' }}>
                 <Typography variant="h2">My favourite clubs</Typography>
                 <Club />

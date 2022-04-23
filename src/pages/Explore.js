@@ -17,7 +17,7 @@ function Explore() {
 
     return (
         <>
-            <Typography variant="title">Explore</Typography>
+            <Typography variant="title" component="h1">Explore</Typography>
             <Box sx={{ width: '100%' }}>
                 <TabContext value={value}>
                     <Box sx={{ padding: '1rem' }}>
