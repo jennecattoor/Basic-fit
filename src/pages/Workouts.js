@@ -8,14 +8,13 @@ function Workouts() {
     return (
         <>
             <Typography variant="title" component="h1">Workouts</Typography>
-            <Box sx={{ color: '#fff', background: 'linear-gradient(0.25turn, #FF9D26, #FE7000);', paddingBottom: '1.5rem' }}>
-                <Typography variant="h2">Recommended</Typography>
+            <Box sx={{ color: '#fff', background: 'linear-gradient(0.25turn, #FF9D26, #FE7000);' }}>
+                <Typography variant="h2">New</Typography>
                 {isLoading && <CircularProgress />}
                 {error && <Alert severity="error">Something went wrong</Alert>}
-                <Grid container>{workouts && workouts.data.map(workout => <Grid item xs={6} key={workout.id}><WorkoutCard workout={workout.attributes} /></Grid>)}</Grid>
+                <Grid container>{workouts && workouts.data.slice(workouts.data.length - 2, workouts.data.length).map(workout => <Grid item xs={6} key={workout.id}><WorkoutCard workout={workout.attributes} color="#fff" /></Grid>)}</Grid>
             </Box>
-            <Typography variant="h2">All workouts</Typography>
-            <Grid container></Grid>
+            <Grid container>{workouts && workouts.data.slice(1, 20).map(workout => <Grid item xs={6} key={workout.id}><WorkoutCard workout={workout.attributes} color="#2d2d2d" /></Grid>)}</Grid>
         </>
     );
 }
