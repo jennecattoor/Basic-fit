@@ -1,14 +1,25 @@
-import { Typography, Card, CardContent, Box, Stack, Divider } from '@mui/material';
+import { Typography, Card, CardContent, Box, Stack, Divider, Alert, CircularProgress } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import useFetch from '../hooks/useFetch';
+import { useParams } from "react-router-dom";
 
 import Image from 'mui-image';
 import Testing from '../static/images/workout.jpg';
 
 function WorkoutCard() {
+    const { id } = useParams();
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const { data: workout, isLoading, error } = useFetch(`${backendUrl}/api/workouts/${id}`);
+
+    if (isLoading) {
+        return <CircularProgress />
+    }
+
     return (
         <>
+            {error && <Alert severity="error">Something went wrong</Alert>}
             <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: -10 }}>
                 <Image
                     src={Testing}
@@ -28,7 +39,7 @@ function WorkoutCard() {
                             spacing={0}
                             sx={{ padding: '1rem' }}>
                             <AccessTimeIcon />
-                            <Typography variant="h3">21 min</Typography>
+                            <Typography variant="h3">{workout.data.attributes.duration} min</Typography>
                             <Typography variant="body" sx={{ marginTop: '-.3rem' }}>duration</Typography>
                         </Stack>
                         <Stack
@@ -38,7 +49,7 @@ function WorkoutCard() {
                             spacing={0}
                             sx={{ padding: '1rem' }}>
                             <EqualizerIcon />
-                            <Typography variant="h3">Beginner</Typography>
+                            <Typography variant="h3">{workout.data.attributes.level}</Typography>
                             <Typography variant="body" sx={{ marginTop: '-.3rem' }}>Level</Typography>
                         </Stack>
                         <Stack
@@ -48,23 +59,13 @@ function WorkoutCard() {
                             spacing={0}
                             sx={{ padding: '1rem' }}>
                             <LocalFireDepartmentIcon />
-                            <Typography variant="h3">110</Typography>
+                            <Typography variant="h3">{workout.data.attributes.kcal}</Typography>
                             <Typography variant="body" sx={{ marginTop: '-.3rem' }}>Kcal</Typography>
                         </Stack>
                     </Stack>
                     <Divider variant="middle" />
-                    <Typography variant="title" component="h1">Easter Workout</Typography>
-                    <Typography variant="body" component="h4">
-                        Easter is coming up and you don't want
-                        to worry about the extra calories when
-                        spring is already here. This workout will
-                        help you get in shape before easter so
-                        you can enjoy your brunch guilt-free!
-                        If you are doing this workout at home
-                        use a heavy object or just bodyweight
-                        either way, get ready to warm the body
-                        to pick up as many easter eggs as you
-                        can!</Typography>
+                    <Typography variant="title" component="h1">{workout.data.attributes.name}</Typography>
+                    <Typography variant="body" component="h4">{workout.data.attributes.description}</Typography>
                 </CardContent>
             </Card>
         </>

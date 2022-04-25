@@ -2,9 +2,9 @@ import { Typography, Card, CardContent, CardMedia } from '@mui/material/';
 import Image from '../static/images/workout.jpg';
 import { Link } from 'react-router-dom'
 
-function WorkoutCard({ workout, color }) {
+function WorkoutCard({ workout, color, id }) {
     return (
-        <Link to="/workoutdetail" style={{ textDecoration: 'none' }}>
+        <Link to={`/workoutdetail/${id}`} style={{ textDecoration: 'none' }}>
             <Card sx={{ maxWidth: 225, boxShadow: 0, margin: '.5rem 1rem', background: "none" }}>
                 <CardContent sx={{ padding: 0 }}>
                     <CardMedia
