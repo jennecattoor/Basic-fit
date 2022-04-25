@@ -14,7 +14,8 @@ function Workouts() {
                 {error && <Alert severity="error">Something went wrong</Alert>}
                 <Grid container>{workouts && workouts.data.slice(workouts.data.length - 2, workouts.data.length).reverse().map(workout => <Grid item xs={6} key={workout.id}><WorkoutCard workout={workout.attributes} color="#fff" /></Grid>)}</Grid>
             </Box>
-            <Grid container>{workouts && workouts.data.slice(1, 20).map(workout => <Grid item xs={6} key={workout.id}><WorkoutCard workout={workout.attributes} color="#2d2d2d" /></Grid>)}</Grid>
+            <Typography variant="h2">All</Typography>
+            <Grid container>{workouts && workouts.data.slice(0, workouts.data.length - 2).map(workout => <Grid item xs={6} key={workout.id}><WorkoutCard workout={workout.attributes} color="#2d2d2d" /></Grid>)}</Grid>
         </>
     );
 }

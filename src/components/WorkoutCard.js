@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function WorkoutCard({ workout, color }) {
     return (
         <Link to="/workoutdetail" style={{ textDecoration: 'none' }}>
-            <Card sx={{ maxWidth: 225, boxShadow: 0, margin: '1rem', background: "none" }}>
+            <Card sx={{ maxWidth: 225, boxShadow: 0, margin: '.5rem 1rem', background: "none" }}>
                 <CardContent sx={{ padding: 0 }}>
                     <CardMedia
                         component="img"
