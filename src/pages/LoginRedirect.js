@@ -1,5 +1,7 @@
+import { CircularProgress, Alert } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import useFetch from '../hooks/useFetch';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -8,6 +10,7 @@ const LoginRedirect = (props) => {
   const location = useLocation();
   const params = useParams();
   const navigate = useNavigate();
+  const { data: profiles, isLoading, error } = useFetch(`${backendUrl}/api/profiles`);
 
   useEffect(() => {
     // Successfully logged with the provider
@@ -25,16 +28,49 @@ const LoginRedirect = (props) => {
         // Now saving the jwt to use it for future authenticated requests to Strapi
         localStorage.setItem('jwt', res.jwt);
         localStorage.setItem('username', res.user.username);
-        setText('You have been successfully logged in. You will be redirected in a few seconds....');
-        setTimeout(() => navigate('/home'), 500); // Redirect to homepage after 3 sec
+        localStorage.setItem('id', res.user.id);
+
+        if (profiles) {
+          const allProfiles = profiles.data.map(profile => profile.attributes.userId);
+
+          if (allProfiles.find(e => e === res.user.id)) {
+            console.log('user exists')
+            setText('Welcome back!');
+            setTimeout(() => navigate('/home'), 500);
+          }
+
+          else {
+            console.log('user DOESNT exists')
+            fetch(`${backendUrl}/api/profiles`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ data: { userName: res.user.username, userId: res.user.id } }),
+            })
+              .then(response => response.json())
+              .then(data => {
+                console.log('Success:', data);
+                setText('Welcome back!');
+                setTimeout(() => navigate('/home'), 500);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
+          }
+        }
       })
       .catch(err => {
         console.log(err);
         setText('An error occurred, please see the developer console.')
       });
-  }, [navigate, location.search, params.providerName]);
+  }, [navigate, location.search, params.providerName, profiles]);
 
-  return <p>{text}</p>
+  if (isLoading) {
+    return <CircularProgress />
+  }
+
+  return <p>{error && <Alert severity="error">Something went wrong</Alert>}{text}</p>
 };
 
 export default LoginRedirect;

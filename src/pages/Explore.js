@@ -32,7 +32,7 @@ function Explore() {
                         <Browse title='Nutrition' text='Recipes, blogs and advice from nutrition experts' />
                         <Browse title='Lifestyle' text='Your inspiration to feel good and happy' />
                     </TabPanel>
-                    <TabPanel value="2">Item Two</TabPanel>
+                    <TabPanel value="2">No favourites yet. Browse some workouts and add them to your favourites.</TabPanel>
                 </TabContext>
             </Box>
         </>
