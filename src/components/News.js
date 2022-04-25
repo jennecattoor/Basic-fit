@@ -1,20 +1,17 @@
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import { Typography, Card, CardContent, CardMedia } from '@mui/material';
 
-function News() {
+function News({ article }) {
     return (
-        <Card sx={{ maxWidth: 345, boxShadow: 0 }}>
+        <Card sx={{ maxWidth: 500, margin: '0 1rem' }}>
             <CardContent sx={{ padding: 0 }}>
                 <CardMedia
                     component="img"
                     alt="Air Games"
-                    height="140"
+                    height="180"
                     image="https://picsum.photos/400"
                 />
-                <Typography variant="h2">Discover the Air Games</Typography>
-                <Typography variant="body">Good news! Thanks to our partnership with the Air Games, our members can enjoy a discounted rate</Typography>
+                <Typography variant="h2" component="h2">{article.title}</Typography>
+                <Typography variant="body" component="h4">{article.article}</Typography>
             </CardContent>
         </Card>
     );
