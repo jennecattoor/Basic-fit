@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Typography from '@mui/material/Typography';
+import { Typography, Box } from '@mui/material';
 import Button from '@mui/material/Button';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -8,13 +8,13 @@ const providersNames = [
   'google',
 ];
 
-const LoginButton = (props) => <a href={`${backendUrl}/api/connect/${props.providerName}`}>
+const LoginButton = (props) => <a style={{ textDecoration: 'none' }} href={`${backendUrl}/api/connect/${props.providerName}`}>
   <Button variant="outlined">Connect to {props.providerName}</Button>
 </a>;
 
 const LogoutButton = (props) => <Button variant="outlined" onClick={props.onClick}>Logout</Button>;
 
-const Login = (props) => {
+const Login = () => {
   const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
 
   const logout = (e) => {
@@ -29,11 +29,8 @@ const Login = (props) => {
   if (isLogged) {
     buttons = <LogoutButton onClick={logout} />;
   } else {
-    buttons = <ul style={{ listStyleType: 'none' }}>
-      {providersNames.map((providerName, i) => <li key={providerName}>
-        <LoginButton providerName={providerName} />
-      </li>)}
-    </ul>;
+    buttons = providersNames.map((providerName, i) => <LoginButton key={providerName} providerName={providerName} />)
+      ;
   }
 
   let text;
@@ -41,13 +38,20 @@ const Login = (props) => {
   if (isLogged) {
     text = <Typography variant="h2">Welcome {localStorage.getItem('username')}, you are connected!</Typography>;
   } else {
-    text = <Typography variant="h2">You are not connected, please log in</Typography>;
+    text = <Typography variant="h2">Please log in to continue</Typography>;
   }
 
-  return <div>
-    {text}
-    {buttons}
-  </div>;
+  return <>
+    <Box display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh">
+      {text}
+      {buttons}
+    </Box>
+  </>
+    ;
 }
 
 export default Login;

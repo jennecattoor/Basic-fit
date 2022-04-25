@@ -1,4 +1,4 @@
-import { CircularProgress, Alert } from '@mui/material'
+import { CircularProgress, Alert, Typography, Box } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import useFetch from '../hooks/useFetch';
@@ -34,13 +34,11 @@ const LoginRedirect = (props) => {
           const allProfiles = profiles.data.map(profile => profile.attributes.userId);
 
           if (allProfiles.find(e => e === res.user.id)) {
-            console.log('user exists')
             setText('Welcome back!');
-            setTimeout(() => navigate('/home'), 500);
+            setTimeout(() => navigate('/home'), 1200);
           }
 
           else {
-            console.log('user DOESNT exists')
             fetch(`${backendUrl}/api/profiles`, {
               method: 'POST',
               headers: {
@@ -51,8 +49,8 @@ const LoginRedirect = (props) => {
               .then(response => response.json())
               .then(data => {
                 console.log('Success:', data);
-                setText('Welcome back!');
-                setTimeout(() => navigate('/home'), 500);
+                setText('Welcome to Basic Fit!');
+                setTimeout(() => navigate('/home'), 1200);
               })
               .catch((error) => {
                 console.error('Error:', error);
@@ -70,7 +68,17 @@ const LoginRedirect = (props) => {
     return <CircularProgress />
   }
 
-  return <p>{error && <Alert severity="error">Something went wrong</Alert>}{text}</p>
+  return <div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh">
+      {error && <Alert severity="error">Something went wrong</Alert>}
+      <Typography variant="h2" component="h2">{text}
+      </Typography>
+    </Box></div>
 };
 
 export default LoginRedirect;
