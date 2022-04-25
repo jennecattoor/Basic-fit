@@ -4,7 +4,7 @@ import useFetch from '../hooks/useFetch';
 
 function Workouts() {
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    const { data: workouts, isLoading, error } = useFetch(`${backendUrl}/api/workouts`);
+    const { data: workouts, isLoading, error } = useFetch(`${backendUrl}/api/workouts?populate=*`);
     return (
         <>
             <Typography variant="title" component="h1">Workouts</Typography>

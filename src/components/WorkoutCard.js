@@ -1,5 +1,4 @@
 import { Typography, Card, CardContent, CardMedia } from '@mui/material/';
-import Image from '../static/images/workout.jpg';
 import { Link } from 'react-router-dom'
 
 function WorkoutCard({ workout, color, id }) {
@@ -9,8 +8,8 @@ function WorkoutCard({ workout, color, id }) {
                 <CardContent sx={{ padding: 0 }}>
                     <CardMedia
                         component="img"
-                        alt="Image of Dumbells"
-                        image={Image}
+                        alt={workout.image.data.attributes.alternativeText}
+                        image={workout.image.data.attributes.formats.small.url}
                     />
                     <Typography variant="h2" sx={{ color: color, padding: '.5rem 0 0 0' }}>{workout.name}</Typography>
                     <Typography variant="body" sx={{ color: color, padding: '0' }}>{workout.level} · {workout.duration} min</Typography>

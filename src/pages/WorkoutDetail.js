@@ -4,14 +4,12 @@ import EqualizerIcon from '@mui/icons-material/Equalizer';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import useFetch from '../hooks/useFetch';
 import { useParams } from "react-router-dom";
-
 import Image from 'mui-image';
-import Testing from '../static/images/workout.jpg';
 
 function WorkoutCard() {
     const { id } = useParams();
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    const { data: workout, isLoading, error } = useFetch(`${backendUrl}/api/workouts/${id}`);
+    const { data: workout, isLoading, error } = useFetch(`${backendUrl}/api/workouts/${id}?populate=*`);
 
     if (isLoading) {
         return <CircularProgress />
@@ -21,9 +19,10 @@ function WorkoutCard() {
         <>
             {error && <Alert severity="error">Something went wrong</Alert>}
             <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: -10 }}>
-                <Image
-                    src={Testing}
-                    duration={500} />
+                {<Image
+                    alt={workout.data.attributes.image.data.attributes.alternativeText}
+                    src={workout.data.attributes.image.data.attributes.formats.small.url}
+                    duration={600} />}
             </Box>
             <Card sx={{ boxShadow: 0, marginTop: '25rem' }}>
                 <CardContent sx={{ padding: 0 }}>
