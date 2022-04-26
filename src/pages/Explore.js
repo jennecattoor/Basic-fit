@@ -1,12 +1,10 @@
 import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabPanel from '@mui/lab/TabPanel';
+import { Typography, Box, Tabs, Tab, CircularProgress, Alert, Grid } from '@mui/material';
+import { TabContext, TabPanel } from '@mui/lab';
 import Browse from "../components/Browse";
 import { Link } from 'react-router-dom'
+import useFetch from '../hooks/useFetch';
+import WorkoutCard from '../components/WorkoutCard';
 
 function Explore() {
     const [value, setValue] = React.useState('1');
@@ -14,6 +12,16 @@ function Explore() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const { data: workouts, isLoading, error } = useFetch(`${backendUrl}/api/workouts?populate=*`);
+
+    if (isLoading) {
+        return <CircularProgress />
+    }
+
+    const id = parseInt(localStorage.getItem('id'));
+    const favourites = workouts.data.filter(workout => workout.attributes.profiles.data.find(item => item.attributes.userId === id))
 
     return (
         <>
@@ -32,7 +40,13 @@ function Explore() {
                         <Browse title='Nutrition' text='Recipes, blogs and advice from nutrition experts' />
                         <Browse title='Lifestyle' text='Your inspiration to feel good and happy' />
                     </TabPanel>
-                    <TabPanel value="2">No favourites yet. Browse some workouts and add them to your favourites.</TabPanel>
+                    <TabPanel value="2" sx={{ padding: 0 }}>
+                        {error && <Alert severity="error">Something went wrong</Alert>}
+                        <Typography variant="h2">Favourite workouts</Typography>
+                        <Grid container>
+                            {workouts && favourites.map(workout => <Grid item xs={6} key={"workout" + workout.id}><WorkoutCard workout={workout.attributes} id={workout.id} color="#2d2d2d" /></Grid>)}
+                        </Grid>
+                    </TabPanel>
                 </TabContext>
             </Box>
         </>
