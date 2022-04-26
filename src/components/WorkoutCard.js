@@ -7,12 +7,13 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 function WorkoutCard({ workout, color, id }) {
 
     const addFavourites = () => {
-        fetch(`${backendUrl}/api/profiles`, {
+        const profileId = localStorage.getItem('profileId');
+        fetch(`${backendUrl}/api/profiles/${profileId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ data: { profileId: localStorage.getItem('id'), workoutId: id } }),
+            body: JSON.stringify({ data: { favouriteWorkouts: [id] } }),
         })
             .then(response => response.json())
             .then(data => {
