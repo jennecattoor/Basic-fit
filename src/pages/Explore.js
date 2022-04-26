@@ -28,7 +28,7 @@ function Explore() {
     }
 
     const id = parseInt(localStorage.getItem('id'));
-    const favourites = workouts.data.filter(workout => workout.attributes.profiles.data.find(item => item.attributes.userId === id))
+    const favourites = workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.attributes.userId === id))
 
     return (
         <>
@@ -49,7 +49,7 @@ function Explore() {
                     </TabPanel>
                     <TabPanel value="2" sx={{ padding: 0 }}>
                         {error && <Alert severity="error">Something went wrong</Alert>}
-                        <Typography variant="h2">Favourite workouts</Typography>
+                        {workouts && <Typography variant="h2">Favourite workouts</Typography>}
                         <Grid container>
                             {workouts && favourites.map(workout => <Grid item xs={6} key={"workout" + workout.id}><WorkoutCard workout={workout.attributes} id={workout.id} color="#2d2d2d" /></Grid>)}
                         </Grid>

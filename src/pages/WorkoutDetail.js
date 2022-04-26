@@ -5,6 +5,7 @@ import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import useFetch from '../hooks/useFetch';
 import { useParams } from "react-router-dom";
 import Image from 'mui-image';
+import ExerciseCard from '../components/ExerciseCard'
 
 function WorkoutCard() {
     const { id } = useParams();
@@ -31,7 +32,7 @@ function WorkoutCard() {
                     src={workout.data.attributes.image.data.attributes.formats.small.url}
                     duration={600} />}
             </Box>
-            <Card sx={{ boxShadow: 0, marginTop: '25rem' }}>
+            <Card sx={{ boxShadow: 0, marginTop: '30rem' }}>
                 <CardContent sx={{ padding: 0 }}>
                     <Stack
                         direction="row"
@@ -72,6 +73,8 @@ function WorkoutCard() {
                     <Divider variant="middle" />
                     <Typography variant="title" component="h1">{workout.data.attributes.name}</Typography>
                     <Typography variant="body" component="h4">{workout.data.attributes.description}</Typography>
+                    <Typography variant="h2" component="h2" sx={{ marginTop: '2rem' }}>What you'll do</Typography>
+                    <ExerciseCard />
                 </CardContent>
             </Card>
         </>

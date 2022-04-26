@@ -19,7 +19,7 @@ function Home() {
             minHeight="100vh">
             <CircularProgress />
         </Box>
-    }
+    } 
 
     return (
         <>
