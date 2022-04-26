@@ -1,18 +1,28 @@
-import { Typography, Card, CardContent, Box, Stack, Divider, Alert, CircularProgress } from '@mui/material';
+import { Typography, Card, CardContent, Box, Stack, Divider, Alert, CircularProgress, Fab } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import useFetch from '../hooks/useFetch';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Image from 'mui-image';
 import ExerciseCard from '../components/ExerciseCard'
 
 function WorkoutCard() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const { data: workout, isLoading, error } = useFetch(`${backendUrl}/api/workouts/${id}?populate=*`);
 
-    if (isLoading) {
+    const { data: exercise, isLoading: loading, error: isError } = useFetch(`${backendUrl}/api/exercises?populate=*`);
+
+    if (!loading) {
+        console.log(exercise.data.map(item => item.attributes))
+    }
+
+
+
+    if (isLoading || loading) {
         return <Box
             display="flex"
             flexDirection="column"
@@ -26,6 +36,10 @@ function WorkoutCard() {
     return (
         <>
             {error && <Alert severity="error">Something went wrong</Alert>}
+            {isError && <Alert severity="error">Something went wrong</Alert>}
+            <Fab onClick={() => navigate(-1)} sx={{ position: 'absolute', top: 10, left: 10, boxShadow: 'none', zIndex: 0 }} size="small" aria-label="favourites" >
+                <ArrowBackIosNewIcon />
+            </Fab>
             <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: -10 }}>
                 {<Image
                     alt={workout.data.attributes.image.data.attributes.alternativeText}
