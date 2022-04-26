@@ -11,7 +11,14 @@ function Home() {
     const { data: news, isLoading, error } = useFetch(`${backendUrl}/api/news`);
 
     if (isLoading) {
-        return <CircularProgress />
+        return <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="100vh">
+            <CircularProgress />
+        </Box>
     }
 
     return (

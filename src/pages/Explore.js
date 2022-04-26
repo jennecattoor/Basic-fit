@@ -17,7 +17,14 @@ function Explore() {
     const { data: workouts, isLoading, error } = useFetch(`${backendUrl}/api/workouts?populate=*`);
 
     if (isLoading) {
-        return <CircularProgress />
+        return <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="100vh">
+            <CircularProgress />
+        </Box>
     }
 
     const id = parseInt(localStorage.getItem('id'));

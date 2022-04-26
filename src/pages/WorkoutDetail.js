@@ -12,7 +12,14 @@ function WorkoutCard() {
     const { data: workout, isLoading, error } = useFetch(`${backendUrl}/api/workouts/${id}?populate=*`);
 
     if (isLoading) {
-        return <CircularProgress />
+        return <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="100vh">
+            <CircularProgress />
+        </Box>
     }
 
     return (
