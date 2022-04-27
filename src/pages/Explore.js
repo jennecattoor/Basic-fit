@@ -1,12 +1,8 @@
-import * as React from 'react';
 import { Typography, Box } from '@mui/material';
 import Browse from "../components/Browse";
 import { Link } from 'react-router-dom'
 
-
 function Explore() {
-
-
 
     return (
         <>
