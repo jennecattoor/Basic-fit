@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
-import Coach from "./pages/Coach";
+import Favourites from "./pages/Favourites";
 import Clubs from "./pages/Clubs";
 import Workouts from "./pages/Workouts";
 import WorkoutDetail from "./pages/WorkoutDetail";
@@ -27,7 +27,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="home" element={<Home />} />
           <Route path="explore" element={<Explore />} />
-          <Route path="coach" element={<Coach />} />
+          <Route path="favourites" element={<Favourites />} />
           <Route path="clubs" element={<Clubs />} />
           <Route path="workouts" element={<Workouts />} />
         </Route>

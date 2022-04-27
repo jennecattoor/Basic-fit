@@ -49,7 +49,7 @@ function Home() {
             <Box sx={{ marginTop: '25rem' }}>
                 <Typography variant="title" component="h1" sx={{ background: 'linear-gradient(rgba(255,0,0,0), rgba(255,255,255,1));' }}>Hello<br />{localStorage.getItem('username')}</Typography>
                 <Box sx={{ background: '#fff', paddingBottom: '2rem' }}>
-                    <Typography variant="body">Make fitness a basic, check our workouts and Go For It!</Typography>
+                    <Typography variant="body" component="h4">Make fitness a basic, check our workouts and Go For It!</Typography>
                     <Typography variant="h2" >Favourites</Typography>
                     {profileError && <Alert severity="error">Something went wrong with loading your profile</Alert>}
                     {workoutError && <Alert severity="error">Something went wrong with loading your favourite workouts</Alert>}
