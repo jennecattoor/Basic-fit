@@ -1,4 +1,4 @@
-import { Typography, Box, Alert, CircularProgress, Autocomplete, TextField, Button } from '@mui/material';
+import { Typography, Box, Alert, CircularProgress, Autocomplete, TextField, Button, Grid } from '@mui/material';
 import Club from '../components/Club';
 import useFetch from '../hooks/useFetch';
 import { useState, useEffect } from 'react';
@@ -38,7 +38,9 @@ function Clubs() {
             <Box sx={{ color: '#fff', background: 'linear-gradient(0.25turn, #FF9D26, #FE7000);', paddingBottom: '1.5rem' }}>
                 {error && <Alert severity="error">Something went wrong with loading your profile</Alert>}
                 <Typography variant="h2">My favourite clubs</Typography>
-                {clubs && club.map(club => <Club key={club.id} club={club} />)}
+                <Grid container>
+                    {clubs && club.map(club => <Club key={club.id} club={club} />)}
+                </Grid>
             </Box>
             <Typography variant="h3" component="h3" sx={{ marginTop: '1rem' }}>Search for a club!</Typography>
             <Autocomplete
@@ -49,7 +51,7 @@ function Clubs() {
                 onChange={(event, value) => setValue(value)}
                 renderInput={(params) => <TextField {...params} label="Search Club" />}
             />
-            <Button sx={{ margin: '1rem' }} disableElevation variant="outlined" onClick={() => addFavourite()}>Add to favourites</Button>
+            <Button sx={{ margin: '1rem' }} disableElevation variant="outlined" disabled={!value} onClick={() => addFavourite()}>Add to favourites</Button>
         </>
     );
 }
