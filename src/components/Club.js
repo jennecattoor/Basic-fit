@@ -3,7 +3,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
 function Club({ club }) {
-    console.log(club)
     return (
         <Card sx={{ boxShadow: 0, margin: '0 1rem' }}>
             <CardContent sx={{ padding: 0 }}>
