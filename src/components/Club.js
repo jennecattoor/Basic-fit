@@ -6,7 +6,7 @@ import Image from '../static/images/dumbell.jpg';
 
 function Club({ club }) {
     return (
-        <Card sx={{ maxWidth: 180, boxShadow: 0, margin: '0 1rem' }}>
+        <Card sx={{ maxWidth: 180, boxShadow: 0, margin: '.5rem  1rem' }}>
             <CardContent sx={{ padding: 0 }}>
                 <CardMedia
                     component="img"

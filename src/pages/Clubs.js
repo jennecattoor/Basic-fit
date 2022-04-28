@@ -10,16 +10,36 @@ function Clubs() {
     const profileId = parseInt(localStorage.getItem('profileId'));
     const [value, setValue] = useState("")
     const [club, setClub] = useState([])
-
+    const [search, setSearch] = useState([])
 
     useEffect(() => {
         if (clubs) {
+            setSearch(clubs.data.filter(club => !club.attributes.favouriteProfiles.data.find(item => item.id === profileId)))
             setClub(clubs.data.filter(club => club.attributes.favouriteProfiles.data.find(item => item.id === profileId)))
         }
+
     }, [clubs, profileId]);
 
-    const addFavourite = () => {
-        console.log(value)
+
+    const addFavourite = (value) => {
+        const selectedClub = clubs.data.filter(club => club.attributes.name === value)
+        const favourites = club.map(item => item.id)
+        favourites.push(selectedClub[0].id)
+        fetch(`${backendUrl}/api/profiles/${profileId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ data: { favouriteClubs: favourites } }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
     if (isLoading) {
@@ -37,21 +57,21 @@ function Clubs() {
             <Typography variant="title" component="h1">Clubs</Typography>
             <Box sx={{ color: '#fff', background: 'linear-gradient(0.25turn, #FF9D26, #FE7000);', paddingBottom: '1.5rem' }}>
                 {error && <Alert severity="error">Something went wrong with loading your profile</Alert>}
-                <Typography variant="h2">My favourite clubs</Typography>
+                <Typography variant="h2" component="h2">My favourite clubs</Typography>
                 <Grid container>
-                    {clubs && club.map(club => <Club key={club.id} club={club} />)}
+                    {club && club.map(club => <Club key={club.id} club={club} />)}
                 </Grid>
             </Box>
-            <Typography variant="h3" component="h3" sx={{ marginTop: '1rem' }}>Search for a club!</Typography>
+            <Typography variant="h2" component="h2">Search for a club!</Typography>
             <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={clubs.data.map(club => club.attributes.name)}
+                options={search.map(club => club.attributes.name)}
                 sx={{ width: 300, margin: '1rem' }}
                 onChange={(event, value) => setValue(value)}
                 renderInput={(params) => <TextField {...params} label="Search Club" />}
             />
-            <Button sx={{ margin: '1rem' }} disableElevation variant="outlined" disabled={!value} onClick={() => addFavourite()}>Add to favourites</Button>
+            <Button sx={{ margin: '1rem' }} disableElevation variant="outlined" disabled={!value} onClick={() => addFavourite(value)}>Add to favourites</Button>
         </>
     );
 }
