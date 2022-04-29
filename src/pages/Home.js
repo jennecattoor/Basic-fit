@@ -4,30 +4,22 @@ import Image from 'mui-image';
 import Box from '@mui/material/Box';
 import useFetch from '../hooks/useFetch';
 import WorkoutCard from '../components/WorkoutCard';
+import { useQuery } from "react-query";
 
 import Testing from '../static/images/1.jpg';
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const profileId = parseInt(localStorage.getItem('profileId'));
+
 function Home() {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    const id = parseInt(localStorage.getItem('id'));
-    const { data: news, isLoading, error } = useFetch(`${backendUrl}/api/news?populate=*`);
-    const { data: workouts, isLoading: workoutLoading, error: workoutError } = useFetch(`${backendUrl}/api/workouts?populate=*`);
-    const { data: profiles, isLoading: profileLoading, error: profileError } = useFetch(`${backendUrl}/api/profiles?populate=*`);
+    const { data: news, isLoading: newsLoading, error: newsError } = useFetch(`${backendUrl}/api/news?populate=*`);
 
-    var favourites = []
-    if (workouts) {
-        favourites = workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.attributes.userId === id))
-    }
+    const { data: workouts, isLoading, error } = useQuery("workouts", async () => {
+        const data = await fetch(`${backendUrl}/api/workouts?populate=*`).then(r => r.json());
+        return data;
+    });
 
-    var favouriteWorkoutsList = [];
-    if (profiles) {
-        const profileId = parseInt(localStorage.getItem('profileId'));
-        const userProfile = profiles.data.find(user => user.id === profileId)
-        favouriteWorkoutsList = userProfile.attributes.favouriteWorkouts.data.map(item => item.id)
-    }
-
-
-    if (isLoading || profileLoading || workoutLoading) {
+    if (isLoading) {
         return <Box
             display="flex"
             flexDirection="column"
@@ -51,11 +43,9 @@ function Home() {
                 <Box sx={{ background: '#fff', paddingBottom: '2rem' }}>
                     <Typography variant="body" component="h4">Make fitness a basic, check our workouts and Go For It!</Typography>
                     <Typography variant="h2" >Favourites</Typography>
-                    {profileError && <Alert severity="error">Something went wrong with loading your profile</Alert>}
-                    {workoutError && <Alert severity="error">Something went wrong with loading your favourite workouts</Alert>}
-                    {favourites.length === 0 && <Typography variant="body">You don't have any favourites</Typography>}
+                    {workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).length === 0 && <Typography variant="body">You don't have any favourites</Typography>}
                     <Grid container>
-                        {workouts && favourites.map(workout => <Grid item xs={6} key={"workout" + workout.id}><WorkoutCard workout={workout.attributes} id={workout.id} color="#2d2d2d" favouriteWorkouts={favouriteWorkoutsList} /></Grid>)}
+                        {workouts && workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).map(workout => <Grid item xs={6} key={"workout" + workout.id}><WorkoutCard workout={workout} id={workout.id} color="#2d2d2d" /></Grid>)}
                     </Grid>
                     <Typography variant="h2" >News</Typography>
                     {error && <Alert severity="error">Something went wrong</Alert>}

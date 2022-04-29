@@ -1,22 +1,14 @@
 import { Typography, Box, Alert, CircularProgress, Autocomplete, TextField, Button, Grid, Stack } from '@mui/material';
-import { QueryClient, QueryClientProvider, useQuery, useMutation } from "react-query";
+import { useQueryClient, useQuery, useMutation } from "react-query";
 import { useForm } from "react-hook-form";
 import Club from '../components/Club';
 import { useState } from "react";
 
-const queryClient = new QueryClient();
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const profileId = parseInt(localStorage.getItem('profileId'));
 
 export default function Clubs() {
-    return (
-        <QueryClientProvider client={queryClient}>
-            <Example />
-        </QueryClientProvider>
-    );
-}
-
-function Example() {
+    const queryClient = useQueryClient()
     const { handleSubmit, reset } = useForm();
     const [newClub, setNewClub] = useState();
 
