@@ -1,8 +1,8 @@
+import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import FitnessIcon from '@mui/icons-material/FitnessCenter';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom'
 
 const NavBar = () => {

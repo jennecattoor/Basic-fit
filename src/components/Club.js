@@ -1,12 +1,14 @@
 import { Typography, Box, Fab, Card, CardContent, CardMedia, CircularProgress, Alert } from '@mui/material';
-import Image from '../static/images/dumbell.jpg';
-import CloseIcon from '@mui/icons-material/Close';
 import { useQueryClient, useQuery, useMutation } from "react-query";
+import CloseIcon from '@mui/icons-material/Close';
+import Image from '../static/images/dumbell.jpg';
+import { useStore } from '../store';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const profileId = parseInt(localStorage.getItem('profileId'));
 
 function Club({ club }) {
+    const profileId = parseInt(useStore(state => state.profileId));
+    const jwt = useStore(state => state.jwt);
 
     const { data: clubs, isLoading, error } = useQuery("clubs", async () => {
         const data = await fetch(`${backendUrl}/api/clubs?populate=*`).then(r => r.json());
@@ -21,6 +23,7 @@ function Club({ club }) {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
             },
             body: JSON.stringify({ data: { favouriteClubs: newFavourites } }),
         }).then(r => r.json());
@@ -38,12 +41,7 @@ function Club({ club }) {
     }
 
     if (isLoading) {
-        return <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="100vh">
+        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
             <CircularProgress />
         </Box>
     }

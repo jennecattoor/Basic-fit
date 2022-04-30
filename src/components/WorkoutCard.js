@@ -1,14 +1,17 @@
 import { Typography, Card, CardContent, CardMedia, Box, Fab, CircularProgress, Alert } from '@mui/material/';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Link } from 'react-router-dom'
 import { useQueryClient, useQuery, useMutation } from "react-query";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import { useStore } from '../store';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const profileId = parseInt(localStorage.getItem('profileId'));
 
 function WorkoutCard({ workout, color, id }) {
     const [colorFab, setColorFab] = useState("default")
+
+    const jwt = useStore(state => state.jwt);
+    const profileId = parseInt(useStore(state => state.profileId));
 
     const { data: workouts, isLoading, error } = useQuery("workouts", async () => {
         const data = await fetch(`${backendUrl}/api/workouts?populate=*`).then(r => r.json());
@@ -21,6 +24,7 @@ function WorkoutCard({ workout, color, id }) {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
             },
             body: JSON.stringify({ data: { favouriteWorkouts: data } }),
         }).then(r => r.json());
@@ -51,15 +55,10 @@ function WorkoutCard({ workout, color, id }) {
         if (workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).find(item => item.id === workout.id)) {
             setColorFab("primary")
         }
-    }, [workouts, workout]);
+    }, [workouts, workout, profileId]);
 
     if (isLoading) {
-        return <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="100vh">
+        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
             <CircularProgress />
         </Box>
     }

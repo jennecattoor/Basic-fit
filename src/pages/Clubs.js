@@ -3,20 +3,22 @@ import { useQueryClient, useQuery, useMutation } from "react-query";
 import { useForm } from "react-hook-form";
 import Club from '../components/Club';
 import { useState } from "react";
+import { useStore } from '../store';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const profileId = parseInt(localStorage.getItem('profileId'));
 
 export default function Clubs() {
-    const queryClient = useQueryClient()
     const { handleSubmit, reset } = useForm();
     const [newClub, setNewClub] = useState();
+    const jwt = useStore(state => state.jwt);
+    const profileId = parseInt(useStore(state => state.profileId));
 
     const { data: clubs, isLoading, error } = useQuery("clubs", async () => {
         const data = await fetch(`${backendUrl}/api/clubs?populate=*`).then(r => r.json());
         return data;
     });
 
+    const queryClient = useQueryClient()
     const putFavouriteClub = async (data) => {
         const favourites = clubs.data.filter(club => club.attributes.favouriteProfiles.data.find(item => item.id === profileId)).map(item => item.id)
         favourites.push(data.id)
@@ -24,6 +26,7 @@ export default function Clubs() {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
             },
             body: JSON.stringify({ data: { favouriteClubs: favourites } }),
         }).then(r => r.json());
@@ -43,12 +46,7 @@ export default function Clubs() {
     }
 
     if (isLoading) {
-        return <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="100vh">
+        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
             <CircularProgress />
         </Box>
     }

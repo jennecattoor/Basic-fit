@@ -2,21 +2,16 @@ import { Alert, CircularProgress, Typography, Grid, Box } from '@mui/material';
 import WorkoutCard from '../components/WorkoutCard';
 import { useQuery } from "react-query";
 
-function Workouts() {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
+function Workouts() {
     const { data: workouts, isLoading, error } = useQuery("workouts", async () => {
         const data = await fetch(`${backendUrl}/api/workouts?populate=*`).then(r => r.json());
         return data;
     });
 
     if (isLoading) {
-        return <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="100vh">
+        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
             <CircularProgress />
         </Box>
     }

@@ -1,6 +1,4 @@
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import { Typography, CardContent, Card } from '@mui/material';
 
 function Browse({ title, text }) {
     return (

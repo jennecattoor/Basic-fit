@@ -1,12 +1,12 @@
-import { Typography, CircularProgress, Alert, Grid } from '@mui/material';
-import Box from '@mui/material/Box';
+import { Typography, CircularProgress, Alert, Grid, Box } from '@mui/material';
 import WorkoutCard from '../components/WorkoutCard';
 import { useQuery } from "react-query";
+import { useStore } from '../store';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const profileId = parseInt(localStorage.getItem('profileId'))
 
 function Favourites() {
+    const profileId = parseInt(useStore(state => state.profileId));
 
     const { data: workouts, isLoading, error } = useQuery("workouts", async () => {
         const data = await fetch(`${backendUrl}/api/workouts?populate=*`).then(r => r.json());
@@ -14,12 +14,7 @@ function Favourites() {
     });
 
     if (isLoading) {
-        return <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="100vh">
+        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
             <CircularProgress />
         </Box>
     }
