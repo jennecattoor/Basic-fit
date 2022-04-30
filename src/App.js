@@ -6,6 +6,7 @@ import Favourites from "./pages/Favourites";
 import Clubs from "./pages/Clubs";
 import Workouts from "./pages/Workouts";
 import WorkoutDetail from "./pages/WorkoutDetail";
+import Recipes from "./pages/Recipes";
 import Login from './pages/Login';
 import LoginRedirect from './pages/LoginRedirect';
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="favourites" element={<Favourites />} />
           <Route path="clubs" element={<Clubs />} />
           <Route path="workouts" element={<Workouts />} />
+          <Route path="recipes" element={<Recipes />} />
         </Route>
         <Route path="workoutdetail/:id" element={<WorkoutDetail />} />
       </Routes>

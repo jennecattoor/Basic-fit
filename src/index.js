@@ -1,13 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom';
 import theme from './theme';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import React from 'react';
+import App from './App';
+import './index.css';
+
 
 const queryClient = new QueryClient()
 

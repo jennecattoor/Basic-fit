@@ -8,7 +8,7 @@ import { useQuery } from 'react-query';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-function WorkoutCard() {
+function WorkoutDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -82,4 +82,4 @@ function WorkoutCard() {
     );
 }
 
-export default WorkoutCard;
+export default WorkoutDetail;

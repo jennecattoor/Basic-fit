@@ -42,9 +42,9 @@ function Home() {
                 {username && <Typography variant="title" component="h1" sx={{ background: 'linear-gradient(rgba(255,0,0,0), rgba(255,255,255,1));' }}>Hello<br />{username}</Typography>}
                 <Box sx={{ background: '#fff', paddingBottom: '2rem' }}>
                     <Typography variant="body" component="h4">Make fitness a basic, check our workouts and Go For It!</Typography>
-                    <Typography variant="h2" >Favourites</Typography>
+                    <Typography variant="h2" >Favourite workouts</Typography>
                     {error && <Alert severity="error">Something went wrong with loading the workouts</Alert>}
-                    {workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).length === 0 && <Typography variant="body">You don't have any favourites</Typography>}
+                    {workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).length === 0 && <Typography variant="body">You don't have any favourites yet</Typography>}
                     <Grid container>
                         {workouts && workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).map(workout => <Grid item xs={6} key={"workout" + workout.id}><WorkoutCard workout={workout} id={workout.id} color="#2d2d2d" /></Grid>)}
                     </Grid>
