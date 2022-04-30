@@ -3,14 +3,17 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import useFetch from '../hooks/useFetch';
+import { useQuery } from 'react-query';
 import { useParams, useNavigate } from "react-router-dom";
 
 function WorkoutCard() {
     const { id } = useParams();
     const navigate = useNavigate();
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    const { data: workout, isLoading, error } = useFetch(`${backendUrl}/api/workouts/${id}?populate=*`);
+    const { data: workout, isLoading, error } = useQuery("profiles", async () => {
+        const data = await fetch(`${backendUrl}/api/workouts/${id}?populate=*`).then(r => r.json());
+        return data;
+    });
 
     if (isLoading) {
         return <Box

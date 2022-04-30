@@ -10,7 +10,7 @@ function Explore() {
             <Box sx={{ width: '100%' }}>
                 <Link to="/workouts" style={{ textDecoration: 'none' }}><Browse title='Workouts' text='Club and home workouts, Audio Coach, and GXR classes for everyone' /></Link>
                 <Browse title='Nutrition' text='Recipes, blogs and advice from nutrition experts' />
-                <Link to="/workouts" style={{ textDecoration: 'none' }}><Browse title='Favourites' text='Find your favourite workouts and nutritions here' /></Link>
+                <Link to="/favourites" style={{ textDecoration: 'none' }}><Browse title='Favourites' text='Find your favourite workouts and nutritions here' /></Link>
             </Box>
         </>
     );

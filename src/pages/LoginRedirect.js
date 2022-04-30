@@ -1,7 +1,7 @@
 import { CircularProgress, Alert, Typography, Box } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import useFetch from '../hooks/useFetch';
+import { useQuery } from 'react-query';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -10,7 +10,11 @@ const LoginRedirect = (props) => {
   const location = useLocation();
   const params = useParams();
   const navigate = useNavigate();
-  const { data: profiles, isLoading, error } = useFetch(`${backendUrl}/api/profiles`);
+
+  const { data: profiles, isLoading, error } = useQuery("profiles", async () => {
+    const data = await fetch(`${backendUrl}/api/profiles`).then(r => r.json());
+    return data;
+  });
 
   useEffect(() => {
     // Successfully logged with the provider
