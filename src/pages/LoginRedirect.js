@@ -56,7 +56,7 @@ const LoginRedirect = (props) => {
               .then(data => {
                 console.log('Success:', data);
                 localStorage.setItem('profileId', data.data.id);
-                setLoggedIn(res.jwt, res.user.username);
+                setLoggedIn(res.jwt, res.user.username, data.data.id);
                 setText('Welcome to Basic Fit!');
                 setTimeout(() => navigate('/home'), 1200);
               })
