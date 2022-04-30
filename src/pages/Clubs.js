@@ -10,7 +10,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 export default function Clubs() {
     const { handleSubmit, reset } = useForm();
     const [newClub, setNewClub] = useState();
-    const jwt = useStore(state => state.jwt);
+    const jwt = localStorage.getItem('jwt')
     const profileId = parseInt(useStore(state => state.profileId));
 
     const { data: clubs, isLoading, error } = useQuery("clubs", async () => {

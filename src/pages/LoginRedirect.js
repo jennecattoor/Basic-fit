@@ -39,6 +39,7 @@ const LoginRedirect = (props) => {
           if (allProfiles.find(e => e === res.user.id)) {
             const profileId = profiles.data.find(profile => profile.attributes.userId === res.user.id).id
             localStorage.setItem('profileId', profileId);
+            localStorage.setItem('jwt', res.jwt);
             setLoggedIn(res.jwt, res.user.username, profileId);
             setText('Welcome back!');
             setTimeout(() => navigate('/home'), 1200);
@@ -56,6 +57,7 @@ const LoginRedirect = (props) => {
               .then(data => {
                 console.log('Success:', data);
                 localStorage.setItem('profileId', data.data.id);
+                localStorage.setItem('jwt', res.jwt);
                 setLoggedIn(res.jwt, res.user.username, data.data.id);
                 setText('Welcome to Basic Fit!');
                 setTimeout(() => navigate('/home'), 1200);
