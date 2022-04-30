@@ -56,32 +56,30 @@ function RecipeCard({ recipe, color, id }) {
         }
     }, [recipes, recipe, profileId]);
 
-    if (isLoading) {
-        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
-            <CircularProgress />
-        </Box>
-    }
 
     return (
-        <Card sx={{ maxWidth: 225, boxShadow: 0, margin: '.5rem 1rem', background: "none" }}>
+        <>
+            {isLoading && <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh"><CircularProgress /></Box>}
             {error && <Alert severity="error">Something went wrong with loading the recipes</Alert>}
-            <CardContent sx={{ padding: 0 }}>
-                <Box sx={{ position: "relative" }} onClick={() => checkFavourites(recipe.id)}>
-                    <Fab sx={{ position: 'absolute', top: 10, right: 10, boxShadow: 'none', zIndex: 0 }} size="small" aria-label="favourites" color={colorFab}>
-                        <FavoriteIcon />
-                    </Fab>
-                </Box>
-                <Link href={`https://fitandfeelgood.co.uk/2020/11/avocado-tapenade-egg-toast/`} style={{ textDecoration: 'none' }}>
-                    <CardMedia
-                        component="img"
-                        alt={recipe.attributes.image.data.attributes.alternativeText}
-                        image={recipe.attributes.image.data.attributes.formats.small.url}
-                    />
-                    <Typography variant="h2" sx={{ color: color, padding: '.5rem 0 0 0' }}>{recipe.attributes.name}</Typography>
-                    <Typography variant="body" sx={{ color: color, padding: '0' }}>{recipe.attributes.level} · {recipe.attributes.duration} min</Typography>
-                </Link >
-            </CardContent>
-        </Card>
+            <Card sx={{ maxWidth: 225, boxShadow: 0, margin: '.5rem 1rem', background: "none" }}>
+                <CardContent sx={{ padding: 0 }}>
+                    <Box sx={{ position: "relative" }} onClick={() => checkFavourites(recipe.id)}>
+                        <Fab sx={{ position: 'absolute', top: 10, right: 10, boxShadow: 'none', zIndex: 0 }} size="small" aria-label="favourites" color={colorFab}>
+                            <FavoriteIcon />
+                        </Fab>
+                    </Box>
+                    <Link href={`https://fitandfeelgood.co.uk/2020/11/avocado-tapenade-egg-toast/`} style={{ textDecoration: 'none' }}>
+                        <CardMedia
+                            component="img"
+                            alt={recipe.attributes.image.data.attributes.alternativeText}
+                            image={recipe.attributes.image.data.attributes.formats.small.url}
+                        />
+                        <Typography variant="h2" sx={{ color: color, padding: '.5rem 0 0 0' }}>{recipe.attributes.name}</Typography>
+                        <Typography variant="body" sx={{ color: color, padding: '0' }}>{recipe.attributes.level} · {recipe.attributes.duration} min</Typography>
+                    </Link >
+                </CardContent>
+            </Card>
+        </>
     );
 }
 

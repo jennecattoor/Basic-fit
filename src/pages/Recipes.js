@@ -10,18 +10,13 @@ function Recipes() {
         return data;
     });
 
-    if (isLoading) {
-        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
-            <CircularProgress />
-        </Box>
-    }
-
     return (
         <>
+            {isLoading && <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh"><CircularProgress /></Box>}
+            {error && <Alert severity="error">Something went wrong with loading the recipes</Alert>}
             <Typography variant="title" component="h1">Nutrition</Typography>
             <Box sx={{ color: '#fff', background: 'linear-gradient(0.25turn, #FF9D26, #FE7000);' }}>
                 <Typography variant="h2">New</Typography>
-                {error && <Alert severity="error">Something went wrong with loading the recipes</Alert>}
                 <Grid container>{recipes && recipes.data.slice(recipes.data.length - 2, recipes.data.length).reverse().map(recipe => <Grid item xs={6} key={"recipe" + recipe.id}><RecipeCard recipe={recipe} id={recipe.id} color="#fff" /></Grid>)}</Grid>
             </Box>
             <Typography variant="h2">All</Typography>

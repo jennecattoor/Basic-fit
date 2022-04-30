@@ -23,14 +23,11 @@ function Home() {
         return data;
     });
 
-    if (isLoading || newsLoading) {
-        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
-            <CircularProgress />
-        </Box>
-    }
-
     return (
         <>
+            {(isLoading || newsLoading) && <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh"><CircularProgress /></Box>}
+            {error && <Alert severity="error">Something went wrong with loading the workouts</Alert>}
+            {newsError && <Alert severity="error">Something went wrong</Alert>}
             <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: -10 }}>
                 <Image
                     alt="People jumping in air"
@@ -43,14 +40,12 @@ function Home() {
                 <Box sx={{ background: '#fff', paddingBottom: '2rem' }}>
                     <Typography variant="body" component="h4">Make fitness a basic, check our workouts and Go For It!</Typography>
                     <Typography variant="h2" >Favourite workouts</Typography>
-                    {error && <Alert severity="error">Something went wrong with loading the workouts</Alert>}
-                    {workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).length === 0 && <Typography variant="body">You don't have any favourites yet</Typography>}
+                    {workouts && workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).length === 0 && <Typography variant="body">You don't have any favourites yet</Typography>}
                     <Grid container>
                         {workouts && workouts.data.filter(workout => workout.attributes.favouriteProfiles.data.find(item => item.id === profileId)).map(workout => <Grid item xs={6} key={"workout" + workout.id}><WorkoutCard workout={workout} id={workout.id} color="#2d2d2d" /></Grid>)}
                     </Grid>
                     <Typography variant="h2" >News</Typography>
-                    {newsError && <Alert severity="error">Something went wrong</Alert>}
-                    {news && news.data.map(article => <News key={article.id} article={article.attributes} />)}
+                    {news && news && news.data.map(article => <News key={article.id} article={article.attributes} />)}
                 </Box>
             </Box>
         </>

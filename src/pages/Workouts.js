@@ -10,18 +10,13 @@ function Workouts() {
         return data;
     });
 
-    if (isLoading) {
-        return <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
-            <CircularProgress />
-        </Box>
-    }
-
     return (
         <>
+            {isLoading && <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh"><CircularProgress /></Box>}
+            {error && <Alert severity="error">Something went wrong with loading the workouts</Alert>}
             <Typography variant="title" component="h1">Workouts</Typography>
             <Box sx={{ color: '#fff', background: 'linear-gradient(0.25turn, #FF9D26, #FE7000);' }}>
                 <Typography variant="h2">New</Typography>
-                {error && <Alert severity="error">Something went wrong with loading the workouts</Alert>}
                 <Grid container>{workouts && workouts.data.slice(workouts.data.length - 2, workouts.data.length).reverse().map(workout => <Grid item xs={6} key={"workout" + workout.id}><WorkoutCard workout={workout} id={workout.id} color="#fff" /></Grid>)}</Grid>
             </Box>
             <Typography variant="h2">All</Typography>
